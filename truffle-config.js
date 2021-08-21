@@ -1,7 +1,7 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 const fs = require('fs');
-const { privatekey, infura_id } = JSON.parse(fs.readFileSync(".secret").toString().trim());
+const { privatekey, infura_id, eth_api_key, bsc_api_key } = JSON.parse(fs.readFileSync(".secret").toString().trim());
 // const mnemonic = `twice attract squirrel journey retreat assume canyon april solar primary usage pony`;
 
 const binanceTestnetProvider = new HDWalletProvider({
@@ -79,6 +79,13 @@ module.exports = {
                 // evmVersion: "byzantium"
             }
         }
+    },
+    plugins: [
+        'truffle-plugin-verify'
+    ],
+    api_keys: {
+        etherscan: eth_api_key,
+        bscscan: bsc_api_key,
     },
 
     // Truffle DB is currently disabled by default; to enable it, change enabled: false to enabled: true
